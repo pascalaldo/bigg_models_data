@@ -2,7 +2,7 @@ name: Download genomes and upload all models + genomes to an azure blob.
 
 on:
   push:
-    branches: [ pre-prod ]
+    branches: [ main ]
 
 jobs:
   build-and-run:
