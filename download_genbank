@@ -1,26 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 from os import mkdir, rename
 from os.path import isdir, isfile, join
 from Bio import Entrez
-import argparse
 from multiprocessing import Pool
 from functools import partial
 
-parser = argparse.ArgumentParser()
-parser.add_argument('email')
-parser.add_argument('--threads', type=int, default=1)
-args = parser.parse_args()
-Entrez.email = args.email
+Entrez.email = os.environ["NCBI_EMAIL"]
+Entrez.api_key = os.environ.get("NCBI_API_KEY")
+N_THREADS = int(os.environ.get("N_THREADS", 1))
 
-FOLDER_NAME = 'genbank'
+FOLDER_NAME = '/genbank'
 
 class NotFoundError(Exception):
     pass
 
 def main():
-    pool = Pool(args.threads)
+    pool = Pool(N_THREADS)
 
     if not isdir(FOLDER_NAME):
         mkdir(FOLDER_NAME)
@@ -52,7 +50,7 @@ def main():
                 continue
 
             if assembly is not None:
-                print("""Cannot automatically assemblies. Be sure that all gb files are listed.""")
+                print("""Cannot automatically download assemblies. Be sure that all gb files are listed.""")
                 # The following code /almost/ works, but assemblies match to
                 # incorrect annotation files for an unknown reason.
 

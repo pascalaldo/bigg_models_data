@@ -1,0 +1,9 @@
+services:
+  biggr-data:
+    build: .
+    container_name: biggr-data
+    volumes:
+      - /data/biggr-genbank:/genbank
+    env_file: ".env"
+    environment:
+      - N_THREADS=5
