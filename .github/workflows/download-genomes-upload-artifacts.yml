@@ -37,6 +37,7 @@ jobs:
             await script({github, context, core})
       - name: Run docker image
         run: |
+          mkdir -p /data
           mkdir -p model_genomes
           sudo ln -s $PWD/model_genomes /data/biggr-genbank/
           docker compose up --exit-code-from biggr-data
