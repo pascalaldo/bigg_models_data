@@ -15,8 +15,8 @@ jobs:
           persist-credentials: false
       - name: Create .env file
         run: |
-          echo "NCBI_API_KEY=${{secrets.BIGGR_NCBI_API_KEY}}"
-          echo "NCBI_EMAIL=${{secrets.BIGGR_NCBI_EMAIL}}"
+          echo "NCBI_API_KEY=${{secrets.BIGGR_NCBI_API_KEY}}" > .env
+          echo "NCBI_EMAIL=${{secrets.BIGGR_NCBI_EMAIL}}" >> .env
       - name: Build docker image
         run: |
           docker compose build
