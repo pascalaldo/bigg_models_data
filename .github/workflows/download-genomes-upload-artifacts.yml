@@ -20,3 +20,12 @@ jobs:
       - name: Build docker image
         run: |
           docker compose build
+      - name: Run docker image
+        run: |
+          mkdir -p /data/biggr-genbank/
+          docker compose up --exit-code-from biggr-data
+      - name: Upload genomes artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: model_genomes
+          path: /data/biggr-genbank/
