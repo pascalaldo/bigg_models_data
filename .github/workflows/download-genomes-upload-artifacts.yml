@@ -7,6 +7,9 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
 
     steps:
       - name: Checkout code
@@ -20,9 +23,22 @@ jobs:
       - name: Build docker image
         run: |
           docker compose build
+      - name: Download previous artifact
+        uses: actions/github-script@v6
+        continue-on-error: true
+        env:
+          WORKFLOW_FILENAME: download-genomes-upload-artifacts.yml
+          ARTIFACT_NAME: model_genomes
+          ARTIFACT_FILENAME: model_genomes.zip
+          UNZIP_DIR: model_genomes
+        with:
+          script: |
+            const script = require('.github/scripts/download-previous-artifact.js')
+            await script({github, context, core})
       - name: Run docker image
         run: |
-          sudo mkdir -p /data/biggr-genbank/
+          mkdir -p model_genomes
+          sudo ln -s $PWD/model_genomes /data/biggr-genbank/
           docker compose up --exit-code-from biggr-data
       - name: Upload genomes artifact
         uses: actions/upload-artifact@v4
