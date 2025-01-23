@@ -6,4 +6,4 @@ services:
       - /data/biggr-genbank:/genbank
     env_file: ".env"
     environment:
-      - N_THREADS=5
+      - N_THREADS=3
