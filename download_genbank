@@ -68,7 +68,7 @@ def retry(times: int, timeout: int = 0):
     in ``exceptions`` are thrown
     :param times: The number of times to repeat the wrapped function/method
     :type times: Int
-    :param timeout: The time in ms to wait before retrying.
+    :param timeout: The time in seconds to wait before retrying.
     :type timeout: Int
     """
     def decorator(func):
@@ -91,7 +91,7 @@ def retry(times: int, timeout: int = 0):
 def gen_filepath(accession):
     return join(FOLDER_NAME, accession + '.gb')
 
-@retry(times=3, timeout=3000)
+@retry(times=3, timeout=3)
 def download_gb(genome_id, filepath):
     # First download to a temporary filepath
     temp_filepath = filepath + '.tmp'
@@ -102,7 +102,7 @@ def download_gb(genome_id, filepath):
     # Then move to the final filepath. This is less likely to get interrupted.
     rename(temp_filepath, filepath)
 
-@retry(times=3, timeout=3000)
+@retry(times=3, timeout=3)
 def download_for_id(assembly, model, genome_id):
     # Get accession
     summary = Entrez.read(Entrez.esummary(db='nucleotide', id=genome_id, retmax=1))
@@ -114,7 +114,7 @@ def download_for_id(assembly, model, genome_id):
     print('Downloading genome %s in %s for %s' % (accession, assembly, model))
     download_gb(genome_id, filepath)
 
-@retry(times=3, timeout=10000)
+@retry(times=3, timeout=10)
 def download_for_accession(model, accession):
     filepath = gen_filepath(accession)
     if isfile(gen_filepath(accession)):
