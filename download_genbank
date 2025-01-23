@@ -57,8 +57,8 @@ def main():
                 #     continue
                 # pool.map(partial(download_for_id, assembly, model), results['IdList'])
 
-            # Can have assembly and accessions
-            download_for_accession(model, accessions)
+            for accession in accessions:
+                download_for_accession(model, accession)
 
 
 def gen_filepath(accession):
