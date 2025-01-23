@@ -30,21 +30,14 @@ jobs:
           WORKFLOW_FILENAME: download-genomes-upload-artifacts.yml
           ARTIFACT_NAME: model_genomes
           ARTIFACT_FILENAME: model_genomes.zip
-          UNZIP_DIR: model_genomes
+          UNZIP_DIR: /data/biggr-genbank/
         with:
           script: |
             const script = require('.github/scripts/download-previous-artifact.js')
             await script({github, context, core})
       - name: Run docker image
         run: |
-          ls
-          ls $PWD
-          sudo mkdir -p /data
-          mkdir -p model_genomes
-          ls
-          ls $PWD
-          echo $PWD
-          sudo ln -sf $PWD/model_genomes /data/biggr-genbank/
+          sudo mkdir -p /data/biggr-genbank/
           docker compose up --exit-code-from biggr-data
       - name: Upload genomes artifact
         uses: actions/upload-artifact@v4
