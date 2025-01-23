@@ -44,7 +44,7 @@ jobs:
           ls
           ls $PWD
           echo $PWD
-          sudo ln -s $PWD/model_genomes /data/biggr-genbank/
+          sudo ln -sf $PWD/model_genomes /data/biggr-genbank/
           docker compose up --exit-code-from biggr-data
       - name: Upload genomes artifact
         uses: actions/upload-artifact@v4
