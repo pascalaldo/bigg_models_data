@@ -1,0 +1,5 @@
+iJO1366.xml	pmid:21988831	ncbi_accession:NC_000913.3
+iAF1260.xml	pmid:17593909	ncbi_accession:NC_000913.3
+iPC815.xml	pmid:21995956	ncbi_accession:NC_003143.1
+iSF_1195.xml	pmid:24277855	ncbi_accession:AE005674.2
+iJN746.xml	pmid:18793442	ncbi_accession:NC_002947.3
