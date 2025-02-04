@@ -72,10 +72,13 @@ def prepare_assembly_download(assemblies):
             str(Path(FOLDER_NAME)),
         ]
     )
+    (Path(FOLDER_NAME) / "ncbi_dataset.zip").unlink()
 
 
 def download_assemblies():
-    subprocess.run(["datasets", "rehydrate", "--directory", str(Path(FOLDER_NAME))])
+    subprocess.run(
+        ["datasets", "rehydrate", "--gzip", "--directory", str(Path(FOLDER_NAME))]
+    )
 
 
 if __name__ == "__main__":
