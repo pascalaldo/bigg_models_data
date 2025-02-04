@@ -3,5 +3,5 @@ services:
     build: .
     container_name: biggr-data
     volumes:
-      - /data/biggr-genbank:/genbank
+      - /data/biggr-assemblies:/assemblies
     env_file: ".env"

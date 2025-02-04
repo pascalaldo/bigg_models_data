@@ -1,4 +1,4 @@
-name: Download genomes and upload all models + genomes to an azure blob.
+name: Download assemblies and upload all models as github artifact.
 
 on:
   push:
@@ -27,20 +27,20 @@ jobs:
         uses: actions/github-script@v6
         continue-on-error: true
         env:
-          WORKFLOW_FILENAME: download-genomes-upload-artifacts.yml
+          WORKFLOW_FILENAME: download-assemblies-upload-artifacts.yml
           ARTIFACT_NAME: model_genomes
           ARTIFACT_FILENAME: model_genomes.zip
-          UNZIP_DIR: /data/biggr-genbank/
+          UNZIP_DIR: /data/biggr-assemblies/
         with:
           script: |
             const script = require('.github/scripts/download-previous-artifact.js')
             await script({github, context, core})
       - name: Run docker image
         run: |
-          sudo mkdir -p /data/biggr-genbank/
+          sudo mkdir -p /data/biggr-assemblies/
           docker compose up --exit-code-from biggr-data
       - name: Upload genomes artifact
         uses: actions/upload-artifact@v4
         with:
           name: model_genomes
-          path: /data/biggr-genbank/
+          path: /data/biggr-assemblies/

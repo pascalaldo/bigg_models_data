@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
+from os import mkdir
+from os.path import isdir
+from pathlib import Path
+from Bio import Entrez
+import subprocess
+import tempfile
+
+Entrez.email = os.environ["NCBI_EMAIL"]
+Entrez.api_key = os.environ.get("NCBI_API_KEY")
+
+FOLDER_NAME = "/assemblies/"
+
+
+class NotFoundError(Exception):
+    pass
+
+
+def main():
+    if not isdir(FOLDER_NAME):
+        mkdir(FOLDER_NAME)
+
+    all_assemblies = []
+    with open("model-genome.tsv") as infile:
+        for line in infile:
+            if line.strip().startswith("#"):
+                continue
+
+            split = line.split("\t")
+            if len(split) != 4:
+                continue
+            _, _, assembly_string, _ = split
+
+            assemblies = [x.strip() for x in assembly_string.split(",")]
+            all_assemblies.extend(assemblies)
+    all_assemblies = list(set(all_assemblies))
+    prepare_assembly_download(all_assemblies)
+    download_assemblies()
+
+
+def prepare_assembly_download(assemblies):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpfilename = Path(tmpdir) / "assemblies.txt"
+        with open(tmpfilename, "w") as f:
+            for assembly in assemblies:
+                f.write(f"{assembly}\n")
+        subprocess.run(
+            [
+                "datasets",
+                "download",
+                "genome",
+                "accession",
+                "--assembly-source",
+                "RefSeq",
+                "--include",
+                "gbff",
+                "--inputfile",
+                str(tmpfilename),
+                "--filename",
+                str(Path(FOLDER_NAME) / "ncbi_dataset.zip"),
+                "--dehydrated",
+            ]
+        )
+    subprocess.run(
+        [
+            "unzip",
+            str(Path(FOLDER_NAME) / "ncbi_dataset.zip"),
+            "-d",
+            str(Path(FOLDER_NAME)),
+        ]
+    )
+
+
+def download_assemblies():
+    subprocess.run(["datasets", "rehydrate", "--directory", str(Path(FOLDER_NAME))])
+
+
+if __name__ == "__main__":
+    main()

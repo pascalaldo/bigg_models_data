@@ -10,7 +10,11 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
-RUN mkdir /genbank
+
+RUN curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets'
+RUN chmod +x datasets
+
+RUN mkdir /assemblies
 COPY ./ /app
 
-CMD ["/app/download_genbank"]
+CMD ["/app/download_assemblies"]

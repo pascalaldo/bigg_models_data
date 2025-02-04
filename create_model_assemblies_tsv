@@ -1,0 +1,148 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
+from os import mkdir
+from os.path import isdir
+from Bio import Entrez
+from pprint import pprint
+
+Entrez.email = os.environ["NCBI_EMAIL"]
+Entrez.api_key = os.environ.get("NCBI_API_KEY")
+
+
+class NotFoundError(Exception):
+    pass
+
+
+def main():
+    skip_models = []
+    with open("model-genome.tsv", "r") as outfile:
+        for i, line in enumerate(outfile):
+            if line.strip().startswith("#"):
+                continue
+
+            split = line.split("\t")
+            if len(split) != 4:
+                continue
+            model, _, _, _ = split
+            skip_models.append(model)
+
+    with open("model-genome.tsv", "a") as outfile:
+        with open("model-genome.txt") as infile:
+            for i, line in enumerate(infile):
+                if line.strip().startswith("#"):
+                    continue
+
+                split = line.split()
+                if len(split) != 3:
+                    continue
+                model, litref, acc_string = split
+                print(f"Model #{i+1}: {model}")
+                if model in skip_models:
+                    print("Skipping")
+                    continue
+                if acc_string.startswith("ncbi_accession:"):
+                    assemblies = []
+                    accessions = [
+                        x.strip().replace(".gb", "")
+                        for x in acc_string.replace("ncbi_accession:", "").split(",")
+                    ]
+                elif acc_string.startswith("ncbi_assembly:"):
+                    sp = acc_string.replace("ncbi_assembly:", "").split(",")
+                    assemblies = [] if sp[0].strip() == "None" else sp[:1]
+                    accessions = [x.strip().replace(".gb", "") for x in sp[1:]]
+                else:
+                    print("Bad accession for " + model)
+                    continue
+                # assemblies = set(assemblies)
+                # for accession in accessions:
+                #     assembly = get_assembly_for_accession(accession)
+                #     if assembly is None:
+                #         print(f"No assembly for accession '{accession}'")
+                #     else:
+                #         assemblies.add(assembly)
+                #     # download_for_accession(model, accession)
+                # assemblies = list(assemblies)
+                new_assemblies = get_assemblies_for_accessions(accessions)
+                assemblies.extend(new_assemblies)
+                assemblies = list(set(assemblies))
+
+                if len(assemblies) == 0:
+                    print(f"No assemblies found for model {model}")
+                elif len(assemblies) > 1:
+                    print(f"Multiple assemblies found for model {model}: {assemblies}")
+
+                outline = f"{model}\t{litref}\t{','.join(assemblies)}\t{','.join(accessions)}\n"
+                outfile.write(outline)
+
+
+def _get_ids_from_elink(**kwargs):
+    links = Entrez.elink(retmode="xml", **kwargs)
+    result = Entrez.read(links)
+    links.close()
+    try:
+        ids = [x["Id"] for x in result[0]["LinkSetDb"][0]["Link"]]
+    except:
+        return []
+    return ids
+
+
+def _get_optimal_assembly_combination(accession_set, accession_presence):
+    front = [([], accession_set)]
+    solutions = []
+    for assembly_id, accessions in accession_presence.items():
+        new_front = []
+        for f, remaining in front:
+            old_len = len(remaining)
+            new_remaining = remaining - accessions
+            new_f = f + [assembly_id]
+            if len(new_remaining) == 0:
+                solutions.append(new_f)
+            elif len(new_remaining) < old_len:
+                new_front.append((new_f, new_remaining))
+        front.extend(new_front)
+    if len(solutions) == 0:
+        return []
+    solutions.sort(key=lambda x: len(x), reverse=True)
+    return solutions[0]
+
+
+def _get_assembly_name(eid):
+    summary = Entrez.read(Entrez.esummary(db="assembly", id=eid, retmax=1))
+    assembly = summary["DocumentSummarySet"]["DocumentSummary"][0]["AssemblyAccession"]
+    return assembly
+
+
+def get_assemblies_for_accessions(accessions):
+    assembly_ids = []
+    for i in range(0, len(accessions), 100):
+        a_subset = accessions[i : min(i + 100, len(accessions))]
+        a_id = _get_ids_from_elink(
+            dbfrom="nuccore",
+            id=",".join(a_subset),
+            db="assembly",
+            linkname="nuccore_assembly",
+        )
+        assembly_ids.extend(a_id)
+    assembly_ids = list(set(assembly_ids))
+    accession_set = set(accessions)
+    accession_presence = {}
+    for assembly_id in assembly_ids:
+        assembly_nuc_ids = _get_ids_from_elink(
+            dbfrom="assembly",
+            id=assembly_id,
+            db="nuccore",
+            linkname="assembly_nuccore",
+            idtype="acc",
+        )
+        accession_presence[assembly_id] = set(assembly_nuc_ids) & accession_set
+    assembly_entrez_ids = _get_optimal_assembly_combination(
+        accession_set, accession_presence
+    )
+    assemblies = [_get_assembly_name(eid) for eid in assembly_entrez_ids]
+    return assemblies
+
+
+if __name__ == "__main__":
+    main()
