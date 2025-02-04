@@ -39,6 +39,9 @@ jobs:
         run: |
           sudo mkdir -p /data/biggr-assemblies/
           docker compose up --exit-code-from biggr-data
+      - name: Change permissions before upload
+        run: |
+          sudo chmod -R 775 /data
       - name: Upload genomes artifact
         uses: actions/upload-artifact@v4
         with:
