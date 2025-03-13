@@ -1,18 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-from os import mkdir
-from os.path import isdir
 from pathlib import Path
-from Bio import Entrez
 import subprocess
 import tempfile
 
-Entrez.email = os.environ["NCBI_EMAIL"]
-Entrez.api_key = os.environ.get("NCBI_API_KEY")
-
-FOLDER_NAME = "/assemblies/"
+ASSEMBLIES_DIR = Path("/assemblies/")
 
 
 class NotFoundError(Exception):
@@ -20,8 +13,7 @@ class NotFoundError(Exception):
 
 
 def main():
-    if not isdir(FOLDER_NAME):
-        mkdir(FOLDER_NAME)
+    ASSEMBLIES_DIR.mkdir(parents=True, exist_ok=True)
 
     all_assemblies = []
     with open("model-genome.tsv") as infile:
@@ -60,24 +52,24 @@ def prepare_assembly_download(assemblies):
                 "--inputfile",
                 str(tmpfilename),
                 "--filename",
-                str(Path(FOLDER_NAME) / "ncbi_dataset.zip"),
+                str(ASSEMBLIES_DIR / "ncbi_dataset.zip"),
                 "--dehydrated",
             ]
         )
     subprocess.run(
         [
             "unzip",
-            str(Path(FOLDER_NAME) / "ncbi_dataset.zip"),
+            str(ASSEMBLIES_DIR / "ncbi_dataset.zip"),
             "-d",
-            str(Path(FOLDER_NAME)),
+            str(ASSEMBLIES_DIR),
         ]
     )
-    (Path(FOLDER_NAME) / "ncbi_dataset.zip").unlink()
+    (ASSEMBLIES_DIR / "ncbi_dataset.zip").unlink()
 
 
 def download_assemblies():
     subprocess.run(
-        ["datasets", "rehydrate", "--gzip", "--directory", str(Path(FOLDER_NAME))]
+        ["datasets", "rehydrate", "--gzip", "--directory", str(ASSEMBLIES_DIR)]
     )
 
 
