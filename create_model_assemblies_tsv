@@ -6,6 +6,8 @@ from os import mkdir
 from os.path import isdir
 from Bio import Entrez
 from pprint import pprint
+import sys
+from pathlib import Path
 
 Entrez.email = os.environ["NCBI_EMAIL"]
 Entrez.api_key = os.environ.get("NCBI_API_KEY")
@@ -15,21 +17,24 @@ class NotFoundError(Exception):
     pass
 
 
-def main():
+def main(in_filename):
+    in_filename = Path(in_filename)
+    out_filename = in_filename.with_suffix(".tsv")
     skip_models = []
-    with open("model-genome.tsv", "r") as outfile:
-        for i, line in enumerate(outfile):
-            if line.strip().startswith("#"):
-                continue
+    if out_filename.exists() and out_filename.is_file():
+        with open(out_filename, "r") as outfile:
+            for i, line in enumerate(outfile):
+                if line.strip().startswith("#"):
+                    continue
 
-            split = line.split("\t")
-            if len(split) != 4:
-                continue
-            model, _, _, _ = split
-            skip_models.append(model)
+                split = line.split("\t")
+                if len(split) != 4:
+                    continue
+                model, _, _, _ = split
+                skip_models.append(model)
 
-    with open("model-genome.tsv", "a") as outfile:
-        with open("model-genome.txt") as infile:
+    with open(out_filename, "a") as outfile:
+        with open(in_filename) as infile:
             for i, line in enumerate(infile):
                 if line.strip().startswith("#"):
                     continue
@@ -64,7 +69,7 @@ def main():
                 #         assemblies.add(assembly)
                 #     # download_for_accession(model, accession)
                 # assemblies = list(assemblies)
-                new_assemblies = get_assemblies_for_accessions(accessions)
+                new_assemblies, accessions = get_assemblies_for_accessions(accessions)
                 assemblies.extend(new_assemblies)
                 assemblies = list(set(assemblies))
 
@@ -81,6 +86,9 @@ def _get_ids_from_elink(**kwargs):
     links = Entrez.elink(retmode="xml", **kwargs)
     result = Entrez.read(links)
     links.close()
+    print("======")
+    pprint(kwargs)
+    pprint(result)
     try:
         ids = [x["Id"] for x in result[0]["LinkSetDb"][0]["Link"]]
     except:
@@ -114,17 +122,44 @@ def _get_assembly_name(eid):
     return assembly
 
 
+def is_ref_accession(accession):
+    return accession.startswith("NC_") or accession.startswith("NZ_")
+
+
 def get_assemblies_for_accessions(accessions):
     assembly_ids = []
+    updated_accessions = []
     for i in range(0, len(accessions), 100):
-        a_subset = accessions[i : min(i + 100, len(accessions))]
+        a_subset, a_non_nc = [], []
+        for x in accessions[i : min(i + 100, len(accessions))]:
+            if is_ref_accession(x):
+                a_subset.append(x)
+            else:
+                a_non_nc.append(x)
+        if a_non_nc:
+            for a in a_non_nc:
+                nc_ids = _get_ids_from_elink(
+                    dbfrom="nuccore",
+                    id=a,
+                    db="nuccore",
+                    linkname="nuccore_comp_nuccore",
+                    idtype="acc",
+                )
+                nc_ids = [x for x in nc_ids if is_ref_accession(x)]
+                if not nc_ids:
+                    a_subset.extend(a_non_nc)
+                    break
+                else:
+                    a_subset.extend(nc_ids)
         a_id = _get_ids_from_elink(
             dbfrom="nuccore",
             id=",".join(a_subset),
             db="assembly",
             linkname="nuccore_assembly",
         )
+        updated_accessions.extend(a_subset)
         assembly_ids.extend(a_id)
+    accessions = updated_accessions
     assembly_ids = list(set(assembly_ids))
     accession_set = set(accessions)
     accession_presence = {}
@@ -141,8 +176,8 @@ def get_assemblies_for_accessions(accessions):
         accession_set, accession_presence
     )
     assemblies = [_get_assembly_name(eid) for eid in assembly_entrez_ids]
-    return assemblies
+    return assemblies, accessions
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
