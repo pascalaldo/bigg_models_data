@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
+import pandas as pd
+import sys
+from pathlib import Path
+import shutil
+import subprocess
+
+
+def load_genomes_file(filename):
+    df = pd.read_csv(
+        filename,
+        sep="\t",
+        index_col=0,
+        names=[
+            "model_filename",
+            "publication",
+            "assemblies",
+            "accessions",
+            "cobra_environment",
+        ],
+    )
+    df["cobra_environment"] = df["cobra_environment"].fillna("latest")
+    return df
+
+
+ORIGINAL_MODEL_DIRECTORY = Path.cwd() / Path("original_models/")
+CONVERTED_MODEL_DIRECTORY = Path.cwd() / Path("models/")
+ENVIRONMENTS_DIRECTORY = Path.cwd() / Path("old_cobra_environments/")
+
+ENVIRONMENTS = {
+    "cobra_0.14.2": "cobra_0.14.2",
+    "cobra_0.15.4": "cobra_0.15.4",
+}
+
+USER_ID = os.geteuid()
+GROUP_ID = os.getegid()
+
+
+def build_environments():
+    envs = list(set(ENVIRONMENTS.values()))
+    for env in envs:
+        completed_process = subprocess.run(
+            ["docker", "build", ".", "-f", f"Dockerfile.{env}", "-t", env],
+            cwd=ENVIRONMENTS_DIRECTORY,
+        )
+        completed_process.check_returncode()
+
+
+def main(filename):
+    build_environments()
+    model_genomes = load_genomes_file(filename)
+    for model_filename, row in model_genomes.iterrows():
+        original_filename = ORIGINAL_MODEL_DIRECTORY / model_filename
+        converted_filename = CONVERTED_MODEL_DIRECTORY / model_filename
+        if converted_filename.exists() and converted_filename.is_file():
+            print(f"{model_filename}: Exists, skipping")
+            continue
+        if row["cobra_environment"] == "latest":
+            print(f"{model_filename}: latest (copy file)")
+            shutil.copy(original_filename, converted_filename)
+        elif not (environment := ENVIRONMENTS.get(row["cobra_environment"])) is None:
+            print(f"{model_filename}: {row['cobra_environment']}({environment})")
+            completed_process = subprocess.run(
+                [
+                    "docker",
+                    "run",
+                    "--user",
+                    f"{USER_ID}:{GROUP_ID}",
+                    "-v",
+                    f"{ORIGINAL_MODEL_DIRECTORY}:/models/",
+                    "-v",
+                    f"{CONVERTED_MODEL_DIRECTORY}:/converted_models",
+                    environment,
+                    Path("/models") / model_filename,
+                    Path("/converted_models") / model_filename,
+                ]
+            )
+            completed_process.check_returncode()
+        else:
+            print(f"{model_filename}: {row['cobra_environment']}(ERROR)")
+            raise ValueError(f"Unknown environment '{environment}'")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1])

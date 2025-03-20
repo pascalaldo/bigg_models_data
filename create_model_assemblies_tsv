@@ -86,9 +86,6 @@ def _get_ids_from_elink(**kwargs):
     links = Entrez.elink(retmode="xml", **kwargs)
     result = Entrez.read(links)
     links.close()
-    print("======")
-    pprint(kwargs)
-    pprint(result)
     try:
         ids = [x["Id"] for x in result[0]["LinkSetDb"][0]["Link"]]
     except:
@@ -112,7 +109,7 @@ def _get_optimal_assembly_combination(accession_set, accession_presence):
         front.extend(new_front)
     if len(solutions) == 0:
         return []
-    solutions.sort(key=lambda x: len(x), reverse=True)
+    solutions.sort(key=lambda x: len(x))
     return solutions[0]
 
 

@@ -1,0 +1,7 @@
+FROM python:3.7
+
+RUN pip install scipy==1.2.0 swiglpk==4.65.0 python-libsbml-experimental==5.17.2 optlang==1.4.4 cobra==0.14.2
+COPY ./convert_model.py ./convert_model.py
+
+ENTRYPOINT ["python", "convert_model.py"]
+
