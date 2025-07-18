@@ -16,7 +16,8 @@ def main():
     ASSEMBLIES_DIR.mkdir(parents=True, exist_ok=True)
 
     all_assemblies = []
-    with open("model-genome.tsv") as infile:
+    # with open("model-genome.tsv") as infile:
+    with open("model-genome-small_set.tsv") as infile:
         for line in infile:
             if line.strip().startswith("#"):
                 continue
