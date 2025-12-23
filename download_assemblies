@@ -4,6 +4,7 @@
 from pathlib import Path
 import subprocess
 import tempfile
+import json
 
 ASSEMBLIES_DIR = Path("/assemblies/")
 
@@ -12,28 +13,30 @@ class NotFoundError(Exception):
     pass
 
 
+def load_genomes_file(filename):
+    with open(filename, "r") as f:
+        data = json.load(f)
+    return data
+
+
 def main():
     ASSEMBLIES_DIR.mkdir(parents=True, exist_ok=True)
 
     all_assemblies = []
-    with open("model-genome.tsv") as infile:
-        for line in infile:
-            if line.strip().startswith("#"):
-                continue
+    data = load_genomes_file("model-genome-clostr.json")
 
-            split = line.split("\t")
-            if len(split) != 4:
-                continue
-            _, _, assembly_string, _ = split
-
-            assemblies = [x.strip() for x in assembly_string.split(",")]
-            all_assemblies.extend(assemblies)
+    for model_data in data["models"]:
+        assembly = model_data["assembly"]
+        all_assemblies.append(assembly)
     all_assemblies = list(set(all_assemblies))
     prepare_assembly_download(all_assemblies)
     download_assemblies()
 
 
 def prepare_assembly_download(assemblies):
+    (ASSEMBLIES_DIR / "README.md").unlink(missing_ok=True)
+    (ASSEMBLIES_DIR / "md5sum.txt").unlink(missing_ok=True)
+    (ASSEMBLIES_DIR / "ncbi_dataset" / "fetch.txt").unlink(missing_ok=True)
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpfilename = Path(tmpdir) / "assemblies.txt"
         with open(tmpfilename, "w") as f:
@@ -54,7 +57,8 @@ def prepare_assembly_download(assemblies):
                 "--filename",
                 str(ASSEMBLIES_DIR / "ncbi_dataset.zip"),
                 "--dehydrated",
-            ]
+            ],
+            input=(b"y\n" * 10),
         )
     subprocess.run(
         [

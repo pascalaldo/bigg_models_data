@@ -7,3 +7,5 @@ models/iML1515.xml
 previous_versions/
 .mypy_cache/
 .env
+models
+models/

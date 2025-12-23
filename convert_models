@@ -2,28 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pandas as pd
 import sys
 from pathlib import Path
 import shutil
 import subprocess
+import json
 
 
 def load_genomes_file(filename):
-    df = pd.read_csv(
-        filename,
-        sep="\t",
-        index_col=0,
-        names=[
-            "model_filename",
-            "publication",
-            "assemblies",
-            "accessions",
-            "cobra_environment",
-        ],
-    )
-    df["cobra_environment"] = df["cobra_environment"].fillna("latest")
-    return df
+    with open(filename, "r") as f:
+        data = json.load(f)
+    return data["models"]
 
 
 ORIGINAL_MODEL_DIRECTORY = Path.cwd() / Path("original_models/")
@@ -52,17 +41,19 @@ def build_environments():
 def main(filename):
     build_environments()
     model_genomes = load_genomes_file(filename)
-    for model_filename, row in model_genomes.iterrows():
+    for model_data in model_genomes:
+        model_filename = model_data["filename"]
+        cobra_environment = model_data.get("cobra_env", "latest")
         original_filename = ORIGINAL_MODEL_DIRECTORY / model_filename
         converted_filename = CONVERTED_MODEL_DIRECTORY / model_filename
         if converted_filename.exists() and converted_filename.is_file():
             print(f"{model_filename}: Exists, skipping")
             continue
-        if row["cobra_environment"] == "latest":
+        if cobra_environment == "latest":
             print(f"{model_filename}: latest (copy file)")
             shutil.copy(original_filename, converted_filename)
-        elif not (environment := ENVIRONMENTS.get(row["cobra_environment"])) is None:
-            print(f"{model_filename}: {row['cobra_environment']}({environment})")
+        elif not (environment := ENVIRONMENTS.get(cobra_environment)) is None:
+            print(f"{model_filename}: {cobra_environment}({environment})")
             completed_process = subprocess.run(
                 [
                     "docker",
@@ -80,7 +71,7 @@ def main(filename):
             )
             completed_process.check_returncode()
         else:
-            print(f"{model_filename}: {row['cobra_environment']}(ERROR)")
+            print(f"{model_filename}: {cobra_environment}(ERROR)")
             raise ValueError(f"Unknown environment '{environment}'")
 
 
