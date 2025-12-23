@@ -1,0 +1,594 @@
+{
+  "models": [
+    {
+      "filename": "GCF_902652195.1.xml",
+      "assembly": "GCF_902652195.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693575.1.xml",
+      "assembly": "GCF_022693575.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009876425.1.xml",
+      "assembly": "GCF_009876425.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709335.1.xml",
+      "assembly": "GCF_020709335.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964252575.1.xml",
+      "assembly": "GCF_964252575.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964239715.1.xml",
+      "assembly": "GCF_964239715.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964252455.1.xml",
+      "assembly": "GCF_964252455.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964243945.1.xml",
+      "assembly": "GCF_964243945.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964249795.1.xml",
+      "assembly": "GCF_964249795.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874145.1.xml",
+      "assembly": "GCF_009874145.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_003149285.1.xml",
+      "assembly": "GCF_003149285.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964245125.1.xml",
+      "assembly": "GCF_964245125.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009696405.1.xml",
+      "assembly": "GCF_009696405.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964251295.1.xml",
+      "assembly": "GCF_964251295.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_027695885.1.xml",
+      "assembly": "GCF_027695885.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_002814255.1.xml",
+      "assembly": "GCF_002814255.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_003459885.1.xml",
+      "assembly": "GCF_003459885.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874205.1.xml",
+      "assembly": "GCF_009874205.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964246375.1.xml",
+      "assembly": "GCF_964246375.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964240785.1.xml",
+      "assembly": "GCF_964240785.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709315.1.xml",
+      "assembly": "GCF_020709315.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693475.1.xml",
+      "assembly": "GCF_022693475.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964239495.1.xml",
+      "assembly": "GCF_964239495.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709235.1.xml",
+      "assembly": "GCF_020709235.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_900116735.1.xml",
+      "assembly": "GCF_900116735.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964252475.1.xml",
+      "assembly": "GCF_964252475.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964243965.1.xml",
+      "assembly": "GCF_964243965.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_019130895.1.xml",
+      "assembly": "GCF_019130895.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_002221705.2.xml",
+      "assembly": "GCF_002221705.2",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964242455.1.xml",
+      "assembly": "GCF_964242455.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_041226065.1.xml",
+      "assembly": "GCF_041226065.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964248735.1.xml",
+      "assembly": "GCF_964248735.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964246095.1.xml",
+      "assembly": "GCF_964246095.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709275.1.xml",
+      "assembly": "GCF_020709275.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_019125695.1.xml",
+      "assembly": "GCF_019125695.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693435.1.xml",
+      "assembly": "GCF_022693435.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964251955.1.xml",
+      "assembly": "GCF_964251955.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964246075.1.xml",
+      "assembly": "GCF_964246075.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009876375.1.xml",
+      "assembly": "GCF_009876375.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_051064475.1.xml",
+      "assembly": "GCF_051064475.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709465.1.xml",
+      "assembly": "GCF_020709465.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_042849295.1.xml",
+      "assembly": "GCF_042849295.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964242285.1.xml",
+      "assembly": "GCF_964242285.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964250425.1.xml",
+      "assembly": "GCF_964250425.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022845735.1.xml",
+      "assembly": "GCF_022845735.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_039832195.1.xml",
+      "assembly": "GCF_039832195.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_900114575.1.xml",
+      "assembly": "GCF_900114575.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_040093915.1.xml",
+      "assembly": "GCF_040093915.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964250005.1.xml",
+      "assembly": "GCF_964250005.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_012271835.1.xml",
+      "assembly": "GCF_012271835.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874155.1.xml",
+      "assembly": "GCF_009874155.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874195.1.xml",
+      "assembly": "GCF_009874195.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964251365.1.xml",
+      "assembly": "GCF_964251365.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964251825.1.xml",
+      "assembly": "GCF_964251825.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_015550705.1.xml",
+      "assembly": "GCF_015550705.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_902166105.1.xml",
+      "assembly": "GCF_902166105.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693485.1.xml",
+      "assembly": "GCF_022693485.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_903181455.1.xml",
+      "assembly": "GCF_903181455.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693565.1.xml",
+      "assembly": "GCF_022693565.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964249425.1.xml",
+      "assembly": "GCF_964249425.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693625.1.xml",
+      "assembly": "GCF_022693625.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964248195.1.xml",
+      "assembly": "GCF_964248195.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_051065075.1.xml",
+      "assembly": "GCF_051065075.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964240515.1.xml",
+      "assembly": "GCF_964240515.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709535.1.xml",
+      "assembly": "GCF_020709535.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693545.1.xml",
+      "assembly": "GCF_022693545.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009876415.1.xml",
+      "assembly": "GCF_009876415.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_902374605.1.xml",
+      "assembly": "GCF_902374605.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964249895.1.xml",
+      "assembly": "GCF_964249895.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_018458805.1.xml",
+      "assembly": "GCF_018458805.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964247825.1.xml",
+      "assembly": "GCF_964247825.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874055.1.xml",
+      "assembly": "GCF_009874055.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_012317185.1.xml",
+      "assembly": "GCF_012317185.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874095.1.xml",
+      "assembly": "GCF_009874095.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_027691005.1.xml",
+      "assembly": "GCF_027691005.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_023008265.1.xml",
+      "assembly": "GCF_023008265.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964249565.1.xml",
+      "assembly": "GCF_964249565.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709455.1.xml",
+      "assembly": "GCF_020709455.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709385.1.xml",
+      "assembly": "GCF_020709385.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009876385.1.xml",
+      "assembly": "GCF_009876385.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009876345.1.xml",
+      "assembly": "GCF_009876345.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693425.1.xml",
+      "assembly": "GCF_022693425.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022132425.1.xml",
+      "assembly": "GCF_022132425.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_016697325.1.xml",
+      "assembly": "GCF_016697325.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_902166045.1.xml",
+      "assembly": "GCF_902166045.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_009874135.1.xml",
+      "assembly": "GCF_009874135.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_001406695.1.xml",
+      "assembly": "GCF_001406695.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_042847175.1.xml",
+      "assembly": "GCF_042847175.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_019131515.1.xml",
+      "assembly": "GCF_019131515.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709285.1.xml",
+      "assembly": "GCF_020709285.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964248465.1.xml",
+      "assembly": "GCF_964248465.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964252155.1.xml",
+      "assembly": "GCF_964252155.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_020709245.1.xml",
+      "assembly": "GCF_020709245.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_022693525.1.xml",
+      "assembly": "GCF_022693525.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_964241105.1.xml",
+      "assembly": "GCF_964241105.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_039521305.1.xml",
+      "assembly": "GCF_039521305.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    },
+    {
+      "filename": "GCF_027687515.1.xml",
+      "assembly": "GCF_027687515.1",
+      "collection": "iPKB_Clostridiaceae",
+      "prefix": "iPKB_"
+    }
+  ],
+  "collections": [
+    {
+      "bigg_id": "iPKB_Clostridiaceae",
+      "tax_id": 31979,
+      "oneliner": "Auto-generated PanGEMs from PanKB.",
+      "description": "Collection of models generated for the Clostridiaceae family using CarveMe, based on the pangenome available on PanKB."
+    }
+  ]
+}
